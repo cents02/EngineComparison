@@ -65,7 +65,11 @@ function generatedata() {
     var p = document.getElementById("mfr").value //mass flow rate
     var r = document.getElementById("re").value //exhaust radious
     var mass = document.getElementById("mass").value //mass
-    
+    document.getElementById("velbl").innerHTML = "Exhaust speed: " + ve
+    document.getElementById("m0lbl").innerHTML =  "Fuel mass: " + m0
+    document.getElementById("mfrlbl").innerHTML = "Mass flow rate: "+ p
+    document.getElementById("relbl").innerHTML = "Exhaust radious: "+ r
+    document.getElementById("masslbl").innerHTML = "Total mass: " + mass
     var time_interval = 0.001//time interval
     var time = 0//time interval
     var bt = getburntime(p,m0); //burn time
@@ -165,19 +169,25 @@ function getatmospheredensity(height)
   return 
 }
 // For your sanity, please cross check the equations in the paper provided along with the code.
-function getburningvelocity(ve,m0,p,h,t,r) { 
+function getburningvelocity(ve,mass,p,h,t,r) { 
     g = getgravity(h)
     //var1area = (Math.PI*getatmospheredensity(h)*Math.pow(r,2)*0.5)
     var1 = getvar1(mass,r,h,p,t)
     var2 = getvar2(ve,mass,r,h,p,t)
-    result = Math.sqrt(var1)* Math.sqrt() * Math.tanh(Math.sqrt(1/var1)*Math.sqrt(var2))
+    m = getmasst(mass,p,t)
+    k = getk(h,r)
+    //result = Math.sqrt(var1)* Math.sqrt() * Math.tanh(Math.sqrt(1/var1)*Math.sqrt(var2))
     //result = Math.sqrt((2*(ve*p-g*(m0 - p*t))/var1area)) *Math.tanh(t*Math.sqrt(var1area/(2*(m0-p*t))*Math.sqrt((ve*p)/(m0-p*t)-g))) //Equation 3
+    result = -Math.sqrt(g*m - ve*p)*Math.tan(Math.sqrt(k)*Math.sqrt(g*m - ve*p)*t/m)/(Math.sqrt(k))
     return result
 }
-function getburningalt(ve,m0,p,h,t,r)  {
+function getburningalt(ve,mass,p,h,t,r)  {
     g = getgravity(h)
     var1area = (Math.PI*getatmospheredensity(h)*Math.pow(r,2)*0.5)
-    result = (2*(m0-p*t))/var1area * Math.log(Math.cosh(t*Math.sqrt(var1area/(2*(m0-p*t))*Math.sqrt(ve/(m0-p*t)*p-g)))) //Equation 4
+    m = getmasst(mass,p,t)
+    k = getk(h,r)
+    //result = (2*(m0-p*t))/var1area * Math.log(Math.cosh(t*Math.sqrt(var1area/(2*(m0-p*t))*Math.sqrt(ve/(m0-p*t)*p-g)))) //Equation 4
+    result = m*Math.log(Math.cos(Math.sqrt(k)*Math.sqrt(g*m -ve*p)*t))/k
     return result
 }
 function getfallingvelocity(ve,mass,m0,p,h,t,r) {
@@ -199,7 +209,7 @@ function getk(h,r){
   return result
 }
 function getmasst(mass,p,t){
-  result = mass.value - p*t
+  result = mass - p*t
   return result
 }
 function getvar1(mass,r,h,p,t) {

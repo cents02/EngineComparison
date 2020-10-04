@@ -63,23 +63,23 @@
             <br>
             <div class="myrow">
                 <div class="slidecontainer">
-                    <label><p>Exhaust speed</p></label>
+                    <label><p id="velbl">Exhaust speed: </p></label>
                     <input onchange="generategraphs()" type="range" min="1" max="{{enginedet[1]}}" value="5" class="slider" id="ve">
                   </div>
                   <div class="slidecontainer">
-                    <label><p>Exhaust radious</p></label>
+                    <label><p id="relbl">Exhaust radious:</p></label>
                     <input onchange="generategraphs()" type="range" min="{{enginedet[2]}}" max="{{enginedet[3]}}" value="2" class="slider" id="re">
                   </div>
                   <div class="slidecontainer">
-                    <label><p>Fuel mass</p></label>
+                    <label><p id="m0lbl">Fuel mass:</p></label>
                     <input onchange="generategraphs()" type="range" min="{{enginedet[4]}}" max="200" value="150" class="slider" id="m0">
                   </div>
                   <div class="slidecontainer">
-                    <label><p>Mass flow rate</p></label>
-                    <input onchange="generategraphs()" type="range" min="1" max="{{enginedet[4]}}" value="5" class="slider" id="mfr">
+                    <label><p id="mfrlbl">Mass flow rate: </p></label>
+                    <input onchange="generategraphs()" type="range" min="{{enginedet[4]}}" max="30" value="10" class="slider" id="mfr">
                   </div>
                   <div class="slidecontainer">
-                    <label><p>Total mass</p></label>
+                    <label><p id="masslbl">Total mass:</p></label>
                     <input onchange="generategraphs()" type="range" min="{{enginedet[5]}}" max="1000" value="200" class="slider" id="mass">
                   </div>
                 </div>
