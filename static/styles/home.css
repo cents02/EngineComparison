@@ -1,0 +1,17 @@
+
+ .ex
+ {
+  margin:auto;
+  width:90%;
+  padding:10px;
+  border:outset;
+ }
+ select
+ {
+  display:inline;
+  cursor:pointer;
+ }
+.ey
+{
+ display:inline-block;
+} 

@@ -1,0 +1,22 @@
+<head><h1>Welcome to the most adanced physics engine.<br> Please click on two engines to compare</h1></head>
+<body>
+        <form action="/home">
+            <label>Engine 1:</label>
+            <select  id="cars" name="cars">
+                {% for n in names %}
+                <option value="{{n}}">{{n}}</option>
+                {%endfor%}
+            </select>
+            <input type="submit" value="Submit"/>
+        </form>
+        
+<!--
+            <p><label>Engine 2:</label></p><br/>
+            <select  id="cars2" name="cars2">
+                {% for n in names %}
+                <option value="{{n}}">{{n}}</option>
+                {%endfor%}
+            </select>
+            
+-->
+</body>
