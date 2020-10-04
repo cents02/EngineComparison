@@ -1,22 +1,75 @@
-<head><h1>Welcome to the most adanced physics engine.<br> Please click on two engines to compare</h1></head>
-<body>
-        <form action="/home">
+<link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/home.css') }}">
+<script src="{{ url_for('static',filename='js/Chart.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/home.js') }}"></script>
+
+<style>
+
+</style>
+<head>
+    <h1>Welcome to the most adanced physics engine.</h1></head>
+<body onload="onload()">
+    {% if not details %}
+        <form action="/home" method="POST">
             <label>Engine 1:</label>
-            <select  id="cars" name="cars">
+            <select  id="engine" name="engine">
                 {% for n in names %}
                 <option value="{{n}}">{{n}}</option>
                 {%endfor%}
             </select>
             <input type="submit" value="Submit"/>
         </form>
-        
-<!--
-            <p><label>Engine 2:</label></p><br/>
-            <select  id="cars2" name="cars2">
-                {% for n in names %}
-                <option value="{{n}}">{{n}}</option>
+        {%endif%}
+        {% if details %}
+            <table style="width:100%" border = "1">
+                <tr>
+                    <th>Name</th>
+                    <th>Velocity</th>
+                    <th>Thrust</th>
+                    <th>Firing duration</th>
+                    <th>minimum delta</th>
+                    <th>tech level</th>
+                </tr>
+                <tr>    
+                {% for n in enginedet %}
+                    <td>{{n}}</td>
                 {%endfor%}
-            </select>
+                </tr>
+            </table>
+            <p> The spaceship goes this fast</p>
             
--->
+            <form>
+                <img src="{{ url_for('static', filename='assets/space.png')}}" class="anim">
+                <div class="slidecontainer">
+                    <label><p>Exhaust speed</p></label>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="ve">
+                  </div>
+                  <div class="slidecontainer">
+                    <label><p>Initial Speed</p></label>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="v0">
+                  </div>
+                  <div class="slidecontainer">
+                    <label><p>Initial mass</p></label>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="m0">
+                  </div>
+                  <div class="slidecontainer">
+                    <label><p>Mass flow rate</p></label>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="mfr">
+                  </div>
+                  <div class="slidecontainer">
+                    <label><p>Inital altitude</p></label>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="x0">
+                  </div>
+                  <div class="slidecontainer">
+                    <label><p>Time interval</p></label>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="t">
+                  </div>
+                  <div class="slidecontainer">
+                    <label><p>Inital altitude</p></label>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="x0">
+                  </div>
+            </form>
+            <canvas id="line-chart" width="800" height="400"></canvas>
+            
+            
+        {% endif %}
 </body>
