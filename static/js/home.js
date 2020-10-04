@@ -2,9 +2,15 @@ function onload() {
   generategraphs()
 }
 function generategraphs() {
+  var ctx = document.getElementById("line-chart").getContext("2d");
+
+  ctx.canvas.width = 700;
+  ctx.canvas.height = 400;
   var result = generatedata()
   new Chart(document.getElementById("line-chart"), {
       type: 'line',
+      
+      
       data: {
         labels: result[0],
         datasets: [{ 
@@ -16,20 +22,27 @@ function generategraphs() {
         ]
       },
       options: {
+        responsive: false,
+        maintainAspectRatio: false,
         title: {
           display: true,
+          
           text: 'Velocity over time'
         }
       }
     });
-  
+    //chart.canvas.parentNode.style.height = '128px';
+    //chart.canvas.parentNode.style.width = '128px';
+    var ctx2 = document.getElementById("line-chart2").getContext("2d");
+    ctx2.canvas.width = 700;
+    ctx2.canvas.height = 400;
   new Chart(document.getElementById("line-chart2"), {
     type: 'line',
     data: {
       labels: result[0],
       datasets: [{
           data: result[2],
-          label: "Height over Time",
+          label: "Height",
           borderColor: "#3ae123",
           fill: false
         }
@@ -38,7 +51,9 @@ function generategraphs() {
     options: {
       title: {
         display: true,
-        text: 'Studity over time'
+        responsive: false,
+        maintainAspectRatio: false,
+        text: 'Height over time'
       }
     }
   });

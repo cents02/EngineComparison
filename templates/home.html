@@ -34,55 +34,58 @@
         </form>
         {%endif%}
         {% if details %}
-            <table style="width:100%" border = "1">
+            <table style="width:100%" border="1">
                 <tr>
                     <th>Name</th>
-                    <th>Velocity</th>
-                    <th>Thrust</th>
-                    <th>Firing duration</th>
-                    <th>minimum delta</th>
-                    <th>tech level</th>
+                    <th>Maximum Exhaust Velocity</th>
+                    <th>Exhaust radius</th>
+                    <th><a href="https://en.wikipedia.org/wiki/Technology_readiness_level" target="_blank">Tech level</a></th>
                 </tr>
                 <tr>    
-                {% for n in enginedet %}
-                    <td>{{n}}</td>
-                {%endfor%}
+                    <td>{{enginedet[0]}}</td>
+                        <td>{{enginedet[1]}}</td>
+                            <td>{{enginedet[2]}}-{{enginedet[3]}}</td>
+                                <td>{{enginedet[8]}}</td>
+
                 </tr>
+
             </table>
-            <p> The spaceship goes this fast</p>
-            
-          
+            <!-- enable the one below for fun-->
                 <!-- <img src="{{ url_for('static', filename='assets/space.png')}}" class="anim"> -->
-                
             <div class="parent">
-                <div class="left-child">
+                    <div class="left-child">
+                        <img src="{{ url_for('static',filename='assets/'+enginedet[7]) }}">
+                    </div>
+                <div class="right-child">
+                    <p>{{enginedet[6]}}</p>
+                </div>
+            </div>
+            <br>
+            <div class="myrow">
                 <div class="slidecontainer">
                     <label><p>Exhaust speed</p></label>
-                    <input onchange="generategraphs()" type="range" min="1" max="20" value="5" class="slider" id="ve">
+                    <input onchange="generategraphs()" type="range" min="1" max="{{enginedet[1]}}" value="5" class="slider" id="ve">
                   </div>
                   <div class="slidecontainer">
                     <label><p>Exhaust radious</p></label>
-                    <input onchange="generategraphs()" type="range" min="1" max="10" value="2" class="slider" id="re">
+                    <input onchange="generategraphs()" type="range" min="{{enginedet[2]}}" max="{{enginedet[3]}}" value="2" class="slider" id="re">
                   </div>
                   <div class="slidecontainer">
                     <label><p>Fuel mass</p></label>
-                    <input onchange="generategraphs()" type="range" min="1" max="120" value="150" class="slider" id="m0">
+                    <input onchange="generategraphs()" type="range" min="{{enginedet[4]}}" max="200" value="150" class="slider" id="m0">
                   </div>
                   <div class="slidecontainer">
                     <label><p>Mass flow rate</p></label>
-                    <input onchange="generategraphs()" type="range" min="1" max="100" value="5" class="slider" id="mfr">
+                    <input onchange="generategraphs()" type="range" min="1" max="{{enginedet[4]}}" value="5" class="slider" id="mfr">
                   </div>
                   <div class="slidecontainer">
                     <label><p>Total mass</p></label>
-                    <input onchange="generategraphs()" type="range" min="1" max="200" value="200" class="slider" id="mass">
+                    <input onchange="generategraphs()" type="range" min="{{enginedet[5]}}" max="1000" value="200" class="slider" id="mass">
                   </div>
                 </div>
-                <div class="right-child">
-                    <p>description</p>
-                </div>
-            </div>
-            <canvas id="line-chart" width="10" height="10"></canvas>
-            <canvas id="line-chart2" width="10" height="10"></canvas>
+                
+            <canvas id="line-chart" width="100" height="100"></canvas>
+            <canvas id="line-chart2" width="100" height="100"></canvas>
             
             
         {% endif %}

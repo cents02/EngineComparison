@@ -34,21 +34,36 @@
 .parent {
   width: 90%;
   height: 100px;
+  margin-bottom: 10px;
  }
  
  .left-child {
  width: 80px;
  height: 80px;
  margin: 10px;
- 
+ margin-right: 100px;
  float: left;
  }
+ .center-child {
+  width: 150px;
+  height: 50px;
+  margin: 10px;
+  margin-right: 100px;
+  float: center;
+  }
  
  .right-child {
- width: 80px;
- height: 80px;
+ width: 400px;
+ height: 30px;
  margin: 10px;
+ margin-left: 100px;
  
  float: right;
  }
- 
+ .myrow {
+   margin-top: 100px;
+    float: center;
+    display: flex; /* 2. display flex to the rescue */
+    flex-direction: row;
+  
+ }
