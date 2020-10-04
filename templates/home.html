@@ -3,10 +3,24 @@
 <script src="{{ url_for('static',filename='js/home.js') }}"></script>
 
 <style>
-
+    .bg {
+      /* The image used */
+      background-image: url("{{ url_for('static', filename='assets/nasa-hangar.jpg')}}");
+    
+      /* Full height */
+      height: 100%; 
+      color:white;
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
 </style>
+{% if not details %}
 <head>
-    <h1>Welcome to the most adanced physics engine.</h1></head>
+    <h1>To begin, please select your engine</h1></head>
+    {% endif %}
+<div class="bgs">
 <body onload="onload()">
     {% if not details %}
         <form action="/home" method="POST">
@@ -37,30 +51,40 @@
             </table>
             <p> The spaceship goes this fast</p>
             
-            <form>
-                <img src="{{ url_for('static', filename='assets/space.png')}}" class="anim">
+          
+                <!-- <img src="{{ url_for('static', filename='assets/space.png')}}" class="anim"> -->
+                
+            <div class="parent">
+                <div class="left-child">
                 <div class="slidecontainer">
                     <label><p>Exhaust speed</p></label>
-                    <input type="range" min="1" max="100" value="50" class="slider" id="ve">
+                    <input onchange="generategraphs()" type="range" min="1" max="20" value="5" class="slider" id="ve">
                   </div>
                   <div class="slidecontainer">
                     <label><p>Exhaust radious</p></label>
-                    <input type="range" min="1" max="100" value="50" class="slider" id="re">
+                    <input onchange="generategraphs()" type="range" min="1" max="10" value="2" class="slider" id="re">
                   </div>
                   <div class="slidecontainer">
                     <label><p>Fuel mass</p></label>
-                    <input type="range" min="1" max="100" value="50" class="slider" id="m0">
+                    <input onchange="generategraphs()" type="range" min="1" max="120" value="150" class="slider" id="m0">
                   </div>
                   <div class="slidecontainer">
                     <label><p>Mass flow rate</p></label>
-                    <input type="range" min="1" max="100" value="50" class="slider" id="mfr">
+                    <input onchange="generategraphs()" type="range" min="1" max="100" value="5" class="slider" id="mfr">
                   </div>
-                  
-
-
-            </form>
-            <canvas id="line-chart" width="800" height="400"></canvas>
+                  <div class="slidecontainer">
+                    <label><p>Total mass</p></label>
+                    <input onchange="generategraphs()" type="range" min="1" max="200" value="200" class="slider" id="mass">
+                  </div>
+                </div>
+                <div class="right-child">
+                    <p>description</p>
+                </div>
+            </div>
+            <canvas id="line-chart" width="10" height="10"></canvas>
+            <canvas id="line-chart2" width="10" height="10"></canvas>
             
             
         {% endif %}
 </body>
+</div>

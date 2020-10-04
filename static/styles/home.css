@@ -31,3 +31,24 @@
   75%  {background-color: white; left:600px; top:0px;}
   100% {background-color: white; left:800px; top:0px;}
 }
+.parent {
+  width: 90%;
+  height: 100px;
+ }
+ 
+ .left-child {
+ width: 80px;
+ height: 80px;
+ margin: 10px;
+ 
+ float: left;
+ }
+ 
+ .right-child {
+ width: 80px;
+ height: 80px;
+ margin: 10px;
+ 
+ float: right;
+ }
+ 
