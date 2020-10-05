@@ -38,14 +38,14 @@
                 <tr>
                     <th>Name</th>
                     <th>Maximum Exhaust Velocity</th>
-                    <th>Exhaust radius</th>
+                    <th>Thrust</th>
                     <th><a href="https://en.wikipedia.org/wiki/Technology_readiness_level" target="_blank">Tech level</a></th>
                 </tr>
                 <tr>    
                     <td>{{enginedet[0]}}</td>
                         <td>{{enginedet[1]}}</td>
-                            <td>{{enginedet[2]}}-{{enginedet[3]}}</td>
-                                <td>{{enginedet[8]}}</td>
+                            <td id="thrust">{{enginedet[6]}}</td>
+                                <td>{{enginedet[4]}}</td>
 
                 </tr>
 
@@ -54,10 +54,10 @@
                 <!-- <img src="{{ url_for('static', filename='assets/space.png')}}" class="anim"> -->
             <div class="parent">
                     <div class="left-child">
-                        <img src="{{ url_for('static',filename='assets/'+enginedet[7]) }}">
+                        <img src="{{ url_for('static',filename='assets/'+enginedet[3]) }}" width="200" height="200">
                     </div>
                 <div class="right-child">
-                    <p>{{enginedet[6]}}</p>
+                    <p>{{enginedet[2]}}</p>
                 </div>
             </div>
             <br>
@@ -68,19 +68,19 @@
                   </div>
                   <div class="slidecontainer">
                     <label><p id="relbl">Exhaust radious:</p></label>
-                    <input onchange="generategraphs()" type="range" min="{{enginedet[2]}}" max="{{enginedet[3]}}" value="2" class="slider" id="re">
+                    <input onchange="generategraphs()" type="range" min="1" max="999999" value="{{enginedet[3]}}" class="slider" id="re">
                   </div>
                   <div class="slidecontainer">
                     <label><p id="m0lbl">Fuel mass:</p></label>
-                    <input onchange="generategraphs()" type="range" min="{{enginedet[4]}}" max="200" value="150" class="slider" id="m0">
+                    <input onchange="generategraphs()" type="range" min="1" max="9999" value="150" class="slider" id="m0">
                   </div>
-                  <div class="slidecontainer">
+                  <!--<div class="slidecontainer">
                     <label><p id="mfrlbl">Mass flow rate: </p></label>
-                    <input onchange="generategraphs()" type="range" min="{{enginedet[4]}}" max="30" value="10" class="slider" id="mfr">
-                  </div>
+                    <input onchange="generategraphs()" type="range" min="1" max="9999" value="1000" class="slider" id="mfr">
+                  </div>-->
                   <div class="slidecontainer">
                     <label><p id="masslbl">Total mass:</p></label>
-                    <input onchange="generategraphs()" type="range" min="{{enginedet[5]}}" max="1000" value="200" class="slider" id="mass">
+                    <input onchange="generategraphs()" type="range" min="1" max="99999" value="2000" class="slider" id="mass">
                   </div>
                 </div>
                 

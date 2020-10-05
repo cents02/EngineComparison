@@ -55,9 +55,8 @@
  .right-child {
  width: 400px;
  height: 30px;
- margin: 10px;
  margin-left: 100px;
- 
+ text-align: right;
  float: right;
  }
  .myrow {

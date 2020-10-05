@@ -62,16 +62,19 @@ function generategraphs() {
 function generatedata() {
     var ve = document.getElementById("ve").value //velocity exhaust
     var m0 = document.getElementById("m0").value //initial propellant mass
-    var p = document.getElementById("mfr").value //mass flow rate
+    // = document.getElementById("mfr").value //mass flow rate
     var r = document.getElementById("re").value //exhaust radious
     var mass = document.getElementById("mass").value //mass
+    var thrust = document.getElementById("thrust").innerText
     document.getElementById("velbl").innerHTML = "Exhaust speed: " + ve
     document.getElementById("m0lbl").innerHTML =  "Fuel mass: " + m0
-    document.getElementById("mfrlbl").innerHTML = "Mass flow rate: "+ p
+    //document.getElementById("mfrlbl").innerHTML = "Mass flow rate: "+ p
     document.getElementById("relbl").innerHTML = "Exhaust radious: "+ r
     document.getElementById("masslbl").innerHTML = "Total mass: " + mass
     var time_interval = 0.001//time interval
     var time = 0//time interval
+    
+    var p = thrust /ve
     var bt = getburntime(p,m0); //burn time
     var h = 0
     var t = 0
@@ -171,27 +174,30 @@ function getatmospheredensity(height)
 // For your sanity, please cross check the equations in the paper provided along with the code.
 function getburningvelocity(ve,mass,p,h,t,r) { 
     g = getgravity(h)
-    //var1area = (Math.PI*getatmospheredensity(h)*Math.pow(r,2)*0.5)
+    var1area = (Math.PI*getatmospheredensity(h)*Math.pow(r,2)*0.5)
     var1 = getvar1(mass,r,h,p,t)
     var2 = getvar2(ve,mass,r,h,p,t)
     m = getmasst(mass,p,t)
     k = getk(h,r)
-    //result = Math.sqrt(var1)* Math.sqrt() * Math.tanh(Math.sqrt(1/var1)*Math.sqrt(var2))
-    //result = Math.sqrt((2*(ve*p-g*(m0 - p*t))/var1area)) *Math.tanh(t*Math.sqrt(var1area/(2*(m0-p*t))*Math.sqrt((ve*p)/(m0-p*t)-g))) //Equation 3
-    result = -Math.sqrt(g*m - ve*p)*Math.tan(Math.sqrt(k)*Math.sqrt(g*m - ve*p)*t/m)/(Math.sqrt(k))
+    result = Math.sqrt(g*m - ve*p)*Math.tanh(Math.sqrt(k)*Math.sqrt(g*m - ve*p)*t/m)/(Math.sqrt(k))
+    //result = Math.sqrt(var1) * Math.tanh(Math.sqrt(1/var1)*Math.sqrt(var2))
+    //result = Math.sqrt(-((2*(ve*p-g*(masst))/var1area)) *Math.tanh(t*Math.sqrt(var1area/(2*(masst))*Math.sqrt((ve*p)/(masst)-g)))) //Equation 3
+    //result = -Math.sqrt(g*m - ve*p)*Math.tan(Math.sqrt(k)*Math.sqrt(g*m - ve*p)*t/m)/(Math.sqrt(k))
     return result
 }
 function getburningalt(ve,mass,p,h,t,r)  {
     g = getgravity(h)
     var1area = (Math.PI*getatmospheredensity(h)*Math.pow(r,2)*0.5)
-    m = getmasst(mass,p,t)
+    m0 = getmasst(mass,p,t)
     k = getk(h,r)
-    //result = (2*(m0-p*t))/var1area * Math.log(Math.cosh(t*Math.sqrt(var1area/(2*(m0-p*t))*Math.sqrt(ve/(m0-p*t)*p-g)))) //Equation 4
+    masst = getmasst(mass,p,t)
+    //result = (2*(masst))/var1area * Math.log(Math.cosh(t*Math.sqrt(var1area/(2*(masst))*Math.sqrt(ve/(masst)*p-g)))) //Equation 4
     result = m*Math.log(Math.cos(Math.sqrt(k)*Math.sqrt(g*m -ve*p)*t))/k
     return result
 }
 function getfallingvelocity(ve,mass,m0,p,h,t,r) {
     g= getgravity(h)
+    m0 = getmasst(mass,p,t)
     var1area = (Math.PI*getatmospheredensity(h)*Math.pow(r,2)*0.5)
     result = Math.sqrt((2*g*(mass-m0))/var1area)*Math.tanh(t*(Math.sqrt(((var1area)*g))/(2*(mass-m0)))) // Equation 5
     return result;
@@ -200,7 +206,7 @@ function getfallingvelocity(ve,mass,m0,p,h,t,r) {
 function getfallingheight(ve,m0,p,h,t,r) {
   g= getgravity(h)
   var1area = (Math.PI*getatmospheredensity(h)*Math.pow(r,2)*0.5)
-  
+  m0 = getmasst(mass,p,t)
   result = ((2*(mass-m0)/var1area))*Math.log(Math.cosh(t*(Math.sqrt(((var1area/0.5)*g))/(2*(mass-m0))))) // Equation 6
   return result
 }
