@@ -1,4 +1,6 @@
-
+table, td {
+  border: 1px solid black;
+}
  .ex
  {
   margin:auto;

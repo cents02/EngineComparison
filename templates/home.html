@@ -60,15 +60,16 @@
                     <p>{{enginedet[2]}}</p>
                 </div>
             </div>
+            <h1 id="madeit"></h1>
             <br>
             <div class="myrow">
                 <div class="slidecontainer">
                     <label><p id="velbl">Exhaust speed: </p></label>
-                    <input onchange="generategraphs()" type="range" min="1" max="{{enginedet[1]}}" value="5" class="slider" id="ve">
+                    <input onchange="generategraphs()" type="range" min="1" max="{{enginedet[1]}}" value="" class="slider" id="ve">
                   </div>
                   <div class="slidecontainer">
                     <label><p id="relbl">Exhaust radious:</p></label>
-                    <input onchange="generategraphs()" type="range" min="1" max="999999" value="{{enginedet[3]}}" class="slider" id="re">
+                    <input onchange="generategraphs()" type="range" min="1" max="50" value="{{enginedet[5]}}" class="slider" id="re">
                   </div>
                   <div class="slidecontainer">
                     <label><p id="m0lbl">Fuel mass:</p></label>
@@ -83,7 +84,7 @@
                     <input onchange="generategraphs()" type="range" min="1" max="99999" value="2000" class="slider" id="mass">
                   </div>
                 </div>
-                
+            
             <canvas id="line-chart" width="100" height="100"></canvas>
             <canvas id="line-chart2" width="100" height="100"></canvas>
             
